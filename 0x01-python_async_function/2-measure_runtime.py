@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 """
-asynchronous `measure_time` coroutine
-module
+`measure_time` module
 """
 import asyncio
 import time
