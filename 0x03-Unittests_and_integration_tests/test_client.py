@@ -4,7 +4,7 @@ test obj mudule
 """
 import unittest
 import mock
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 from utils import get_json
 from parameterized import parameterized
 from client import GithubOrgClient
@@ -41,4 +41,18 @@ class TestGithubOrgClient(unittest.TestCase):
             }
             res = GithubOrgClient('google')._public_repos_url
             self.assertEqual(res, 'https://api.github.com/orgs/google/repos')
+
+    def test_public_repos(self):
+        """
+        """
+        with patch(
+                    'client.GithubOrgClient._public_repos_url',
+                    new_callable=mock.PropertyMock
+                ) as mock_property:
+            mock_property.return_value = {
+                    'repos_url': 'https://api.github.com/orgs/google/repos'
+            }
+            res = GithubOrgClient('google')._public_repos_url
+            self.assertEqual(res['repos_url'], 'https://api.github.com/orgs/google/repos')
+
 
