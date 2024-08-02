@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+model for untility testing from utils.py
 """
 import unittest
 from unittest.mock import patch, Mock
