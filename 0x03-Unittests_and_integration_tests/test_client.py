@@ -42,7 +42,8 @@ class TestGithubOrgClient(unittest.TestCase):
             res = GithubOrgClient('google')._public_repos_url
             self.assertEqual(res, 'https://api.github.com/orgs/google/repos')
 
-    def test_public_repos(self):
+    @patch('client.get_json')
+    def test_public_repos(self, mock_get_json):
         """
         """
         with patch(
@@ -64,5 +65,5 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         GithubOrgClient.has_license test case
         """
-        res = GithubOrgClient.has_license(repo, license_key)
+        res = GithubOrgClient('google').has_license(repo, license_key)
         self.assertEqual(res, expected)
