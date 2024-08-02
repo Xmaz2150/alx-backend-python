@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-test obj mudule
+module for client testing test_client.py
 """
 import unittest
 import mock
@@ -45,6 +45,7 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json):
         """
+        test public repos
         """
         with patch(
                     'client.GithubOrgClient._public_repos_url',
@@ -54,8 +55,10 @@ class TestGithubOrgClient(unittest.TestCase):
                     'repos_url': 'https://api.github.com/orgs/google/repos'
             }
             res = GithubOrgClient('google')._public_repos_url
-            self.assertEqual(res['repos_url'], 'https://api.github.com/orgs/google/repos')
-
+            self.assertEqual(
+                    res['repos_url'],
+                    'https://api.github.com/orgs/google/repos'
+                    )
 
     @parameterized.expand([
         ({"license": {"key": "my_license"}}, "my_license", True),
