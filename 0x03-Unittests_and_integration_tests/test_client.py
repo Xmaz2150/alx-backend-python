@@ -6,7 +6,7 @@ import unittest
 import mock
 from unittest.mock import patch, Mock
 from utils import get_json
-from parameterized import parameterized
+from parameterized import parameterized, param
 from client import GithubOrgClient
 
 
@@ -61,8 +61,8 @@ class TestGithubOrgClient(unittest.TestCase):
                     )
 
     @parameterized.expand([
-        ({"license": {"key": "my_license"}}, "my_license", True),
-        ({"license": {"key": "other_license"}}, "my_license", False),
+        param(repo={"license": {"key": "my_license"}}, license_key="my_license", expected=True),
+        param(repo={"license": {"key": "other_license"}}, license_key="my_license", expected=False)
     ])
     def test_has_license(self, repo, license_key, expected):
         """
